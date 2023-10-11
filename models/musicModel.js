@@ -4,7 +4,14 @@ const Schema = mongoose.Schema;
 
 let musicSchema = new Schema({
     url :{
-        type : String,
+        type: String,
+        validate: {
+          validator: function(value) {
+            const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
+            return urlPattern.test(value);
+          },
+          message: 'Veuillez fournir une URL valide.',
+        },
         required : true
     },
     name :{
