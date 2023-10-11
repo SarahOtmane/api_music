@@ -17,5 +17,9 @@ router
     .put(voteController.updateAVote)
     .delete(voteController.deleteAVote)
 
+router 
+    .route('/votes/result')
+    .get(voteController.resultVotes)
+
 
 module.exports = router;

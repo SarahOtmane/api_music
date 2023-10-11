@@ -14,6 +14,44 @@ exports.listAllVotes = async (req, res) =>{
     }
 }
 
+exports.resultVotes = async (req, res) =>{
+    try{
+        const musics = await Music.find({});
+
+        const tabResult = [];
+
+        for (const music of musics) {
+            try {
+                const votes = await Vote.find({music_id : music.id});
+
+                let sum = 0;
+
+                votes.forEach(vote => {
+                    sum += vote.note
+                });
+
+                let result = sum / votes.length;
+
+                tabResult.push({music_id:music.id, moyenne : result})
+
+                const maxResult = tabResult.reduce((max, current) => (current.moyenne > max.moyenne) ? current : max);
+
+                res.status(200);
+                res.json(maxResult.music_id);
+            } catch (error) {
+                res.status(500);
+                console.log(error);
+                res.json({ message : 'Erreur serveur'});
+            }
+        }
+    }
+    catch(error){
+        res.status(500);
+            console.log(error);
+            res.json({ message : 'Erreur serveur'});
+    }
+}
+
 exports.createAVote = async(req, res) =>{
 
     try {
