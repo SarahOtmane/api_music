@@ -9,6 +9,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/apiMusic');
 app.use(express.urlencoded());
 app.use(express.json())
 
+const musicRoute = require('./routes/musicRoute.js');
+app.use('/', musicRoute);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
