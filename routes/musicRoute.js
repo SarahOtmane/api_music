@@ -5,13 +5,13 @@ const musicController = require('../controllers/musicController');
 
 
 router
-    .route('/musics')
+    .route('/musique')
     .get(musicController.listAllMusics)
     .post(musicController.createAMusic)
 
 
 router 
-    .route('/musics/:id_music')
+    .route('/musique/:id_music')
     .get(musicController.getAMusic)
     .put(musicController.updateAMusic)
     .delete(musicController.deleteAMusic)
