@@ -7,13 +7,13 @@ const musicController = require('../controllers/musicController');
 router
     .route('/musics')
     .get(musicController.listAllMusics)
-    // .post(postController.createAPost)
+    .post(musicController.createAMusic)
 
 
-// router 
-//     .route('/musics/:id_music')
-//     .get(postController.getAPost)
-//     .put(postController.updateAPost)
-//     .delete(postController.deleteAPost)
+router 
+    .route('/musics/:id_music')
+    .get(musicController.getAMusic)
+//     .put(musicController.updateAPost)
+//     .delete(musicController.deleteAPost)
 
 module.exports = router;
