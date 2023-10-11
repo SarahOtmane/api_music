@@ -16,24 +16,29 @@ exports.listAllVotes = async (req, res) =>{
 
 exports.resultVotes = async (req, res) =>{
     try{
+        //recup la liste des musiques
         const musics = await Music.find({});
 
         const tabResult = [];
 
+        //parcourir la liste des musiques
         for (const music of musics) {
             try {
+                //recup la liste des votes de chaque musiques
                 const votes = await Vote.find({music_id : music.id});
 
                 let sum = 0;
 
+                //faire la moyenne des votes
                 votes.forEach(vote => {
                     sum += vote.note
                 });
-
                 let result = sum / votes.length;
 
+                //mettre dans le tableau chaque musique et sa moyenne
                 tabResult.push({music_id:music.id, moyenne : result})
 
+                //recup l'objet qui a la moyenne la plus eleve
                 const maxResult = tabResult.reduce((max, current) => (current.moyenne > max.moyenne) ? current : max);
 
                 res.status(200);
