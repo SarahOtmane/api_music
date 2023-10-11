@@ -73,12 +73,12 @@ exports.getAVote = async(req, res) =>{
 
     try{
         if(await Vote.findById(req.params.id_vote) === null){
-            res.status(204);
-            res.json({ message : 'Ce vote n existe pas en BDD'});
+            res.status(204)
+            res.json({ message : 'Ce com n existe pas en BDD'});
         }else{
-            const vote = await Vote.findByIdAndDelete(req.params.id_vote);
+            const vote = await Vote.findById(req.params.id_vote);
             res.status(200);
-            res.json({ message : 'Supprimé'});
+            res.json(vote);
         }
     }
     catch(error){
